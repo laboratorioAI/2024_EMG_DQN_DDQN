@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Info description="This toolbox evaluates the responses of a Hand Gesture Recognition model for both a unique repetition, or a full set of repetitions and users.&#xa;Load EMG signals (view example_loadEMG).&#xa;Evaluates a repetition (view example_evalARepetition).&#xa;Evaluate submissions over training user group and testing user group, generate results, graphs and tex (view example_evalATrainingSet)." />

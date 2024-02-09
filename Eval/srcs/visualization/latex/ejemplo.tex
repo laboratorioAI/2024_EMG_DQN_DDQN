@@ -1,0 +1,32 @@
+
+% add
+%\usepackage{adjustbox}
+%\usepackage{graphicx}
+%\usepackage{multirow}
+%\usepackage[table,xcdraw]{xcolor}
+
+
+\begin{table*}[htbp] % amplio usando las dos columnas en doble columna
+% \begin{table}[htbp] % caso unaCol: en una columna cuando es doble columna
+
+\caption{Confusion Matrix of the Proposed Models} \label{tab:confMat}
+\centering
+%\begin{adjustbox}{scale = 0.625} % caso IEEE
+%\small
+\begin{tabular}{c|cccccc|c}
+\hline
+                                                                                           & \multicolumn{6}{c|}{}                                                                                                                                                                                                                                                                                                                   &                                                                                                                  \\
+\multirow{-2}{*}{}                                                                         & \multicolumn{6}{c|}{\multirow{-2}{*}{Targets}}                                                                                                                                                                                                                                                                                          &                                                                                                                  \\\cline{2-7}
+                                                                                           & waveIn                                                         & waveOut                                                        & fist                                                            & open                                                           & pinch                        & noGesture                                        & \multirow{-3}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Predictions Count\\ \% Accuracy\\ (Precision)\end{tabular}}} \\ \hline
+\multicolumn{1}{c|}{waveIn}                                                               & \textbf{1435}                                                   & 9                                                               & 1                                                               & 3                                                              & 0                           & 0                                   & \textbf{\begin{tabular}[c]{@{}c@{}}1448\\ 99.1\%\end{tabular}}                                                   \\\hline
+\multicolumn{1}{c|}{waveOut}                                                              & 10                                                              & \textbf{1460}                                                   & 1                                                               & 13                                                             & 10                          & 2                                   & \textbf{\begin{tabular}[c]{@{}c@{}}1494\\ 97.72\%\end{tabular}}                                                  \\\hline
+\multicolumn{1}{c|}{fist}                                                                  & 3                                                               & 0                                                               & \textbf{1465}                                                   & 2                                                              & 2                           & 2                                   & \textbf{\begin{tabular}[c]{@{}c@{}}1473\\ 99.45\%\\\end{tabular}}                                                  \\\hline
+\multicolumn{1}{c|}{open}                                                                  & 5                                                               & 15                                                              & 2                                                               & \textbf{1416}                                                  & 3                           & 3                                   & \textbf{\begin{tabular}[c]{@{}c@{}}1441\\ 98.27\%\\\end{tabular}}                                                  \\\hline
+\multicolumn{1}{c|}{pinch}                                                                 & 7                                                               & 4                                                               & 2                                                               & 8                                                              & \textbf{1408}              & 2                                     & \textbf{\begin{tabular}[c]{@{}c@{}}1429\\ 98.53\% \\ \end{tabular}}                                                  \\ \hline
+\multicolumn{1}{c|}{noGesture}                                                                 & 40                                                              & 12                                                              & 29                                                              & 58                                                             & 77                          & \textbf{1408}                                       & \textbf{\begin{tabular}[c]{@{}c@{}}216\\ 0\%\end{tabular}}                                                       \\ \hline\hline
+\textbf{\begin{tabular}[c]{@{}c@{}}Targets Count\\ \% Accuracy\\ (Sensitivity)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}1500\\ 95.67\%\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}1500\\ 97.33\%\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}1500\\ 97.67\%\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}1500\\ 94.4\%\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}1500\\ 93.87\%\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}1500\\ 93.87\%\end{tabular}} & {\color[HTML]{CB0000} \textbf{\begin{tabular}[c]{@{}c@{}}7800\\ 95.79\%\end{tabular}}}                \\ \hline
+\end{tabular}
+%\end{adjustbox}
+%\end{table}
+\end{table*}
+

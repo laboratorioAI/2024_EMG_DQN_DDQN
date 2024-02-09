@@ -1,0 +1,15 @@
+/Data
+/DataBk
+/Run
+/testingJSON
+/trainingJSON
+/Experiments
+*.asv
+DQN-*.mat
+DDQN-*.mat
+*.zip
+Agents*.mat
+tags.txt
+model_s30*.mat
+/Tests/Lab/env
+__pycache__

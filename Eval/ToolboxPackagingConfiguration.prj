@@ -1,0 +1,197 @@
+<deployment-project plugin="plugin.toolbox" plugin-version="1.0">
+  <configuration build-checksum="3356902378" file="C:\Users\z_tja\OneDrive - Escuela Politécnica Nacional\PROYECTO\EMG\CEPRA\dataset\proyects\eval_HGRresponses\ToolboxPackagingConfiguration.prj" location="C:\Users\z_tja\OneDrive - Escuela Politécnica Nacional\PROYECTO\EMG\CEPRA\dataset\proyects\eval_HGRresponses" name="ToolboxPackagingConfiguration" target="target.toolbox" target-name="Package Toolbox">
+    <param.appname>eval_HGRresponses</param.appname>
+    <param.authnamewatermark>Jonathan A. Zea</param.authnamewatermark>
+    <param.email>jonathan.a.zea@ieee.org</param.email>
+    <param.company>Lab. de Inteligencia y Visión Artificial</param.company>
+    <param.summary>Hand Gesture Recognition model evaluator of EMG signals. See website for more information.</param.summary>
+    <param.description>This toolbox evaluates the responses of a Hand Gesture Recognition model for both a unique repetition, or a full set of repetitions and users.
+Load EMG signals (view example_loadEMG).
+Evaluates a repetition (view example_evalARepetition).
+Evaluate submissions over training user group and testing user group, generate results, graphs and tex (view example_evalATrainingSet).</param.description>
+    <param.screenshot>${PROJECT_ROOT}\toolboxImg.png</param.screenshot>
+    <param.version>2.5.3</param.version>
+    <param.output>${PROJECT_ROOT}\eval_HGRresponses.mltbx</param.output>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.guid>a7e67730-5bc8-4df7-8f82-63f50ac3c112</param.guid>
+    <param.exclude.filters>% List files contained in your toolbox folder that you would like to exclude
+% from packaging.  Excludes should be listed relative to the toolbox folder.
+% Some examples of how to specify excludes are provided below:
+%
+% A single file in the toolbox folder:
+% .svn
+%
+% A single file in a subfolder of the toolbox folder:
+% example/.svn
+%
+% All files in a subfolder of the toolbox folder:
+% example/*
+%
+% All files of a certain name in all subfolders of the toolbox folder:
+% **/.svn
+%
+% All files matching a pattern in all subfolders of the toolbox folder:
+% **/*.bak
+%
+resources/project/*
+.SimulinkProject/*
+_SimulinkProject/*
+resources/.Project/*
+resources/_Project/*
+**/*.prj
+eval_HGRresponses.mltbx
+lksjyrtlk.png
+resultsHGR
+resultsHGR/responseExp4S_x8
+resultsHGR/responseExp4S_x8.mat
+resultsHGR/responseExp4S_x8/age.fig
+resultsHGR/responseExp4S_x8/age.png
+resultsHGR/responseExp4S_x8/armDamage.fig
+resultsHGR/responseExp4S_x8/armDamage.png
+resultsHGR/responseExp4S_x8/class.fig
+resultsHGR/responseExp4S_x8/class.png
+resultsHGR/responseExp4S_x8/classHist.fig
+resultsHGR/responseExp4S_x8/classHist.png
+resultsHGR/responseExp4S_x8/confusion.fig
+resultsHGR/responseExp4S_x8/confusion.png
+resultsHGR/responseExp4S_x8/confusion.tex
+resultsHGR/responseExp4S_x8/gender.fig
+resultsHGR/responseExp4S_x8/gender.png
+resultsHGR/responseExp4S_x8/handedness.fig
+resultsHGR/responseExp4S_x8/handedness.png
+resultsHGR/responseExp4S_x8/recog.fig
+resultsHGR/responseExp4S_x8/recog.png
+resultsHGR/responseExp4S_x8/recogHist.fig
+resultsHGR/responseExp4S_x8/recogHist.png
+resultsHGR/responseExp4S_x8/summary.txt
+resultsHGR/responseExp4S_x8/tiempos.fig
+resultsHGR/responseExp4S_x8/tiempos.png</param.exclude.filters>
+    <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
+    <param.examples>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;examples&gt;
+   &lt;exampleCategory name="doc"&gt;
+      &lt;example name="example_dataset11Gestures" type="html"&gt;
+         &lt;file type="source"&gt;/doc/html/example_dataset11Gestures.html&lt;/file&gt;
+         &lt;file type="main"&gt;/doc/example_dataset11Gestures.m&lt;/file&gt;
+         &lt;file type="thumbnail"&gt;/doc/html/example_dataset11Gestures.png&lt;/file&gt;
+         &lt;file type="image"&gt;/doc/html/example_dataset11Gestures_01.png&lt;/file&gt;
+      &lt;/example&gt;
+      &lt;example name="example_showConfusion" type="html"&gt;
+         &lt;file type="source"&gt;/doc/html/example_showConfusion.html&lt;/file&gt;
+         &lt;file type="main"&gt;/doc/example_showConfusion.m&lt;/file&gt;
+         &lt;file type="thumbnail"&gt;/doc/html/example_showConfusion.png&lt;/file&gt;
+         &lt;file type="image"&gt;/doc/html/example_showConfusion_01.png&lt;/file&gt;
+         &lt;file type="image"&gt;/doc/html/example_showConfusion_02.png&lt;/file&gt;
+         &lt;file type="image"&gt;/doc/html/example_showConfusion_03.png&lt;/file&gt;
+         &lt;file type="image"&gt;/doc/html/example_showConfusion_04.png&lt;/file&gt;
+         &lt;file type="image"&gt;/doc/html/example_showConfusion_05.png&lt;/file&gt;
+         &lt;file type="image"&gt;/doc/html/example_showConfusion_06.png&lt;/file&gt;
+      &lt;/example&gt;
+   &lt;/exampleCategory&gt;
+&lt;/examples&gt;</param.examples>
+    <param.demosxml />
+    <param.apps />
+    <param.registered.apps />
+    <param.docs>${PROJECT_ROOT}\info.xml</param.docs>
+    <param.getting.started.guide>${PROJECT_ROOT}\doc\GettingStarted.mlx</param.getting.started.guide>
+    <param.matlabpath.excludes />
+    <param.javaclasspath.excludes />
+    <param.exported.on.package>true</param.exported.on.package>
+    <param.required.addons />
+    <param.matlab.project.id>8cae8314-771f-47d2-b081-11d660d44510</param.matlab.project.id>
+    <param.matlab.project.name>eval_HGRresponses</param.matlab.project.name>
+    <param.release.start />
+    <param.release.end />
+    <param.release.current.only>false</param.release.current.only>
+    <param.compatiblity.windows>true</param.compatiblity.windows>
+    <param.compatiblity.macos>true</param.compatiblity.macos>
+    <param.compatiblity.linux>true</param.compatiblity.linux>
+    <param.compatiblity.matlabonline>true</param.compatiblity.matlabonline>
+    <param.installation.map />
+    <param.additional.sw.names />
+    <param.additional.sw.licenses />
+    <param.additional.sw.win.url />
+    <param.additional.sw.mac.url />
+    <param.additional.sw.linux.url />
+    <unset>
+      <param.company />
+      <param.output />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.exclude.pcodedmfiles />
+      <param.demosxml />
+      <param.apps />
+      <param.registered.apps />
+      <param.matlabpath.excludes />
+      <param.javaclasspath.excludes />
+      <param.required.addons />
+      <param.release.start />
+      <param.release.end />
+      <param.release.current.only />
+      <param.compatiblity.windows />
+      <param.compatiblity.macos />
+      <param.compatiblity.linux />
+      <param.compatiblity.matlabonline />
+      <param.installation.map />
+      <param.additional.sw.names />
+      <param.additional.sw.licenses />
+      <param.additional.sw.win.url />
+      <param.additional.sw.mac.url />
+      <param.additional.sw.linux.url />
+    </unset>
+    <fileset.rootdir>
+      <file>${PROJECT_ROOT}</file>
+    </fileset.rootdir>
+    <fileset.rootfiles>
+      <file>${PROJECT_ROOT}\.git</file>
+      <file>${PROJECT_ROOT}\.gitignore</file>
+      <file>${PROJECT_ROOT}\data</file>
+      <file>${PROJECT_ROOT}\demos.xml</file>
+      <file>${PROJECT_ROOT}\doc</file>
+      <file>${PROJECT_ROOT}\eval_HGR_set.m</file>
+      <file>${PROJECT_ROOT}\info.xml</file>
+      <file>${PROJECT_ROOT}\README.md</file>
+      <file>${PROJECT_ROOT}\resources</file>
+      <file>${PROJECT_ROOT}\srcs</file>
+      <file>${PROJECT_ROOT}\toolboxImg.png</file>
+    </fileset.rootfiles>
+    <fileset.depfun.included />
+    <fileset.depfun.excluded />
+    <fileset.package />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}" name="eval_HGRresponses.mltbx" optional="false">C:\Users\z_tja\OneDrive - Escuela Politécnica Nacional\PROYECTO\EMG\CEPRA\dataset\proyects\eval_HGRresponses\eval_HGRresponses.mltbx</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2021b</root>
+      <toolboxes>
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

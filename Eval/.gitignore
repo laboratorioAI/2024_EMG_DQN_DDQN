@@ -1,0 +1,5 @@
+# List of untracked files to ignore
+*.asv
+resultsHGR/
+example_evalATrainingSet/resultsHGR/
+*.mltbx

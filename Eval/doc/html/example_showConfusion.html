@@ -1,0 +1,366 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>example_showConfusion</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-06-10"><meta name="DC.source" content="example_showConfusion.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">options</a></li><li><a href="#3">Creating synthetic samples</a></li><li><a href="#4">Running the evalRecognition Loop</a></li><li><a href="#5">Analyse results</a></li><li><a href="#6">charts Results</a></li><li><a href="#7">output</a></li></ul></div><pre class="codeinput"><span class="comment">%example_showConfusion evaluates a set of repetitions and plots several</span>
+<span class="comment">%results. Uses a small set of synthetic data. Note charts will make more</span>
+<span class="comment">%sense with more users and more reps.</span>
+
+<span class="comment">%{
+</span><span class="comment">Laboratorio de Inteligencia y Visi&oacute;n Artificial
+</span><span class="comment">ESCUELA POLIT&Eacute;CNICA NACIONAL
+</span><span class="comment">Quito - Ecuador
+</span><span class="comment">
+</span><span class="comment">autor: z_tja
+</span><span class="comment">jonathan.a.zea@ieee.org
+</span><span class="comment">
+</span><span class="comment">"I find that I don't understand things unless I try to program them."
+</span><span class="comment">-Donald E. Knuth
+</span><span class="comment">
+</span><span class="comment">18 May 2022
+</span><span class="comment">Matlab 9.11.0.1873467 (R2021b) Update 3.
+</span><span class="comment">%}
+</span>
+clear <span class="string">all</span>
+close <span class="string">all</span>
+clc
+</pre><h2 id="2">options</h2><pre class="codeinput">userGroup = <span class="string">'training'</span>;
+repGroup = <span class="string">'testing'</span>;
+
+options.save = false;
+evalOpts.defaultGesture = <span class="string">'relax'</span>;
+</pre><h2 id="3">Creating synthetic samples</h2><pre class="codeinput"><span class="comment">%------- 4 repetitions for user 1</span>
+
+repsU1.class = num2cell(categorical([<span class="string">"waveIn"</span>; <span class="string">"relax"</span>; <span class="string">"up"</span>; <span class="string">"up"</span>]));
+
+repsU1.vectorOfLabels = <span class="keyword">...</span>
+    {categorical({<span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'waveIn'</span>, <span class="string">'waveIn'</span>, <span class="string">'waveIn'</span>})
+    categorical({<span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'relax'</span>})
+    categorical({<span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'up'</span>, <span class="string">'up'</span>, <span class="string">'relax'</span>})
+    categorical({<span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'waveIn'</span>, <span class="string">'up'</span>, <span class="string">'up'</span>})};
+
+<span class="comment">% all samples may have the same window size and stride</span>
+repsU1.vectorOfTimePoints = <span class="keyword">...</span>
+    {[50 200 400 600 800]
+    [50 200 400 600 800]
+    [50 200 400 600 800]
+    [50 200 400 600 800]
+    };
+
+<span class="comment">% assuming that all windows process with the same processing time</span>
+repsU1.vectorOfProcessingTime = <span class="keyword">...</span>
+    {[0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    };
+
+responses.(repGroup).user_1 = repsU1;
+<span class="comment">%_------- Creating dataset repInfo</span>
+gt = false(1, 1000); <span class="comment">% assuming all reps have the same gt.</span>
+gt(400:600) = true;
+repInfo1 = {[], categorical({<span class="string">'waveIn'</span>}), [], gt};
+repInfo2 = {[], categorical({<span class="string">'relax'</span>}), [], gt};
+repInfo3 = {[], categorical({<span class="string">'up'</span>, }), [], gt};
+repInfo4 = {[], categorical({<span class="string">'up'</span>, }), [], gt};
+
+repsInfo.(userGroup).user_1.repInfo.(repGroup) = [repInfo1
+    repInfo2
+    repInfo3
+    repInfo4];
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="comment">%------- 4 repetitions for user 2</span>
+repsU2.class = num2cell(categorical([<span class="string">"up"</span>; <span class="string">"relax"</span>; <span class="string">"up"</span>; <span class="string">"waveIn"</span>]));
+repsU2.vectorOfLabels = <span class="keyword">...</span>
+    {categorical({<span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'waveIn'</span>, <span class="string">'up'</span>, <span class="string">'up'</span>})
+    categorical({<span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'relax'</span>})
+    categorical({<span class="string">'up'</span>, <span class="string">'relax'</span>, <span class="string">'up'</span>, <span class="string">'up'</span>, <span class="string">'relax'</span>})
+    categorical({<span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'waveIn'</span>, <span class="string">'up'</span>, <span class="string">'relax'</span>})};
+
+<span class="comment">% all samples may have the same window size and stride</span>
+repsU2.vectorOfTimePoints = <span class="keyword">...</span>
+    {[50 200 400 600 800]
+    [50 200 400 600 800]
+    [50 200 400 600 800]
+    [50 200 400 600 800]
+    };
+
+<span class="comment">% assuming that all windows process with the same processing time</span>
+repsU2.vectorOfProcessingTime = <span class="keyword">...</span>
+    {[0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    };
+
+<span class="comment">%_------- Creating dataset repInfo</span>
+gt = false(1, 1000); <span class="comment">% assuming all reps have the same gt.</span>
+gt(500:700) = true;
+repInfo1 = {[], categorical({<span class="string">'waveIn'</span>}), [], gt};
+repInfo2 = {[], categorical({<span class="string">'relax'</span>}), [], gt};
+repInfo3 = {[], categorical({<span class="string">'up'</span>, }), [], gt};
+repInfo4 = {[], categorical({<span class="string">'up'</span>, }), [], gt};
+
+responses.(repGroup).user_2 = repsU2;
+
+
+
+repsInfo.(userGroup).user_2.repInfo.(repGroup) = [repInfo1
+    repInfo2
+    repInfo3
+    repInfo4];
+</pre><h2 id="4">Running the evalRecognition Loop</h2><pre class="codeinput">[evaluation, confusion, tiemps] = evalRecognition_loop(responses, <span class="keyword">...</span>
+    repsInfo, userGroup, repGroup, evalOpts);
+</pre><pre class="codeoutput">10-Jun-2022 17:26:54:	Analyzing user_1
+10-Jun-2022 17:26:54:	Analyzing user_2
+</pre><h2 id="5">Analyse results</h2><pre class="codeinput">[sumTable, class, classStd, recog, recogStd, time, timeStd, <span class="keyword">...</span>
+    targets, outputs] = <span class="keyword">...</span>
+    analyseResults(evaluation, confusion, tiemps, options); <span class="comment">% dataPersons</span>
+beep
+</pre><pre class="codeoutput">Laboratorio de Inteligencia y Visi&oacute;n Artificial
+Escuela Polit&eacute;cnica Nacional
+Quito-Ecuador
+
+by Jonathan A. Zea
+
+===========================================
+MAIN RESULTS
+===========================================
+10-Jun-2022 17:26:55
+classification Accuracy: 75.00% &plusmn; 35.36%		recognition Accuracy: 50.00% &plusmn; 35.36%
+time: 0.1 &plusmn; 4.21637e-17 [s]
+
+
+</pre><h2 id="6">charts Results</h2><pre class="codeinput">plotSummaryResults(sumTable, class, classStd, recog, recogStd <span class="keyword">...</span>
+    ,tiemps, targets, outputs, options)
+</pre><img vspace="5" hspace="5" src="example_showConfusion_01.png" alt=""> <img vspace="5" hspace="5" src="example_showConfusion_02.png" alt=""> <img vspace="5" hspace="5" src="example_showConfusion_03.png" alt=""> <img vspace="5" hspace="5" src="example_showConfusion_04.png" alt=""> <img vspace="5" hspace="5" src="example_showConfusion_05.png" alt=""> <img vspace="5" hspace="5" src="example_showConfusion_06.png" alt=""> <h2 id="7">output</h2><pre class="codeinput">results.class = class;
+results.class_std = classStd;
+results.recog = recog;
+results.recog_std = recogStd;
+results.time = time;
+results.time_std = timeStd;
+
+results
+</pre><pre class="codeoutput">
+results = 
+
+  struct with fields:
+
+        class: 75
+    class_std: 35.3553
+        recog: 50
+    recog_std: 35.3553
+         time: 0.1000
+     time_std: 4.2164e-17
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%example_showConfusion evaluates a set of repetitions and plots several
+%results. Uses a small set of synthetic data. Note charts will make more
+%sense with more users and more reps. 
+
+%{
+Laboratorio de Inteligencia y Visión Artificial
+ESCUELA POLITÉCNICA NACIONAL
+Quito - Ecuador
+
+autor: z_tja
+jonathan.a.zea@ieee.org
+
+"I find that I don't understand things unless I try to program them."
+-Donald E. Knuth
+
+18 May 2022
+Matlab 9.11.0.1873467 (R2021b) Update 3.
+%}
+
+clear all
+close all
+clc
+
+%% options
+userGroup = 'training';
+repGroup = 'testing';
+
+options.save = false;
+evalOpts.defaultGesture = 'relax';
+
+%% Creating synthetic samples
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH- 4 repetitions for user 1
+
+repsU1.class = num2cell(categorical(["waveIn"; "relax"; "up"; "up"]));
+
+repsU1.vectorOfLabels = ...
+    {categorical({'relax', 'relax', 'waveIn', 'waveIn', 'waveIn'})
+    categorical({'relax', 'relax', 'relax', 'relax', 'relax'})
+    categorical({'relax', 'relax', 'up', 'up', 'relax'})
+    categorical({'relax', 'relax', 'waveIn', 'up', 'up'})};
+
+% all samples may have the same window size and stride
+repsU1.vectorOfTimePoints = ...
+    {[50 200 400 600 800]
+    [50 200 400 600 800]
+    [50 200 400 600 800]
+    [50 200 400 600 800]
+    };
+
+% assuming that all windows process with the same processing time
+repsU1.vectorOfProcessingTime = ...
+    {[0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    };
+
+responses.(repGroup).user_1 = repsU1;
+%_REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH- Creating dataset repInfo
+gt = false(1, 1000); % assuming all reps have the same gt.
+gt(400:600) = true;
+repInfo1 = {[], categorical({'waveIn'}), [], gt};
+repInfo2 = {[], categorical({'relax'}), [], gt};
+repInfo3 = {[], categorical({'up', }), [], gt};
+repInfo4 = {[], categorical({'up', }), [], gt};
+
+repsInfo.(userGroup).user_1.repInfo.(repGroup) = [repInfo1
+    repInfo2
+    repInfo3
+    repInfo4];
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH- 4 repetitions for user 2
+repsU2.class = num2cell(categorical(["up"; "relax"; "up"; "waveIn"]));
+repsU2.vectorOfLabels = ...
+    {categorical({'relax', 'relax', 'waveIn', 'up', 'up'})
+    categorical({'relax', 'relax', 'relax', 'relax', 'relax'})
+    categorical({'up', 'relax', 'up', 'up', 'relax'})
+    categorical({'relax', 'relax', 'waveIn', 'up', 'relax'})};
+
+% all samples may have the same window size and stride
+repsU2.vectorOfTimePoints = ...
+    {[50 200 400 600 800]
+    [50 200 400 600 800]
+    [50 200 400 600 800]
+    [50 200 400 600 800]
+    };
+
+% assuming that all windows process with the same processing time
+repsU2.vectorOfProcessingTime = ...
+    {[0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    [0.1 0.1 0.1 0.1 0.1]
+    };
+
+%_REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH- Creating dataset repInfo
+gt = false(1, 1000); % assuming all reps have the same gt.
+gt(500:700) = true;
+repInfo1 = {[], categorical({'waveIn'}), [], gt};
+repInfo2 = {[], categorical({'relax'}), [], gt};
+repInfo3 = {[], categorical({'up', }), [], gt};
+repInfo4 = {[], categorical({'up', }), [], gt};
+
+responses.(repGroup).user_2 = repsU2;
+
+
+
+repsInfo.(userGroup).user_2.repInfo.(repGroup) = [repInfo1
+    repInfo2
+    repInfo3
+    repInfo4];
+
+
+%% Running the evalRecognition Loop
+[evaluation, confusion, tiemps] = evalRecognition_loop(responses, ...
+    repsInfo, userGroup, repGroup, evalOpts);
+
+
+
+%% Analyse results
+[sumTable, class, classStd, recog, recogStd, time, timeStd, ...
+    targets, outputs] = ...
+    analyseResults(evaluation, confusion, tiemps, options); % dataPersons
+beep
+
+%% charts Results
+
+plotSummaryResults(sumTable, class, classStd, recog, recogStd ...
+    ,tiemps, targets, outputs, options)
+
+
+
+%% output
+results.class = class;
+results.class_std = classStd;
+results.recog = recog;
+results.recog_std = recogStd;
+results.time = time;
+results.time_std = timeStd;
+
+results
+
+##### SOURCE END #####
+--></body></html>

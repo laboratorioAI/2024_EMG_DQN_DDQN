@@ -1,0 +1,191 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>example_dataset11Gestures</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-06-10"><meta name="DC.source" content="example_dataset11Gestures.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">predicci&oacute;n</a></li><li><a href="#5">defaultGesture</a></li></ul></div><pre class="codeinput"><span class="comment">%example_dataset11Gestures uses evalRecognition library to evaluate a</span>
+<span class="comment">%repetition using the dataset of 11 gestures.</span>
+
+<span class="comment">%{
+</span><span class="comment">Laboratorio de Inteligencia y Visi&oacute;n Artificial
+</span><span class="comment">ESCUELA POLIT&Eacute;CNICA NACIONAL
+</span><span class="comment">Quito - Ecuador
+</span><span class="comment">
+</span><span class="comment">autor: z_tja
+</span><span class="comment">jonathan.a.zea@ieee.org
+</span><span class="comment">
+</span><span class="comment">"I find that I don't understand things unless I try to program them."
+</span><span class="comment">-Donald E. Knuth
+</span><span class="comment">
+</span><span class="comment">18 May 2022
+</span><span class="comment">Matlab 9.11.0.1873467 (R2021b) Update 3.
+</span><span class="comment">%}</span>
+</pre><p>informaci&oacute;n de la repetici&oacute;n (no depende del modelo) (es parte de los datos)</p><pre class="codeinput">repInfo.gestureName = categorical({<span class="string">'up'</span>});
+
+
+repInfo.groundTruth = false(1, 1000); <span class="comment">% 1000 xq 200 Hz por 5 segundos</span>
+repInfo.groundTruth(200:400) = true;
+</pre><h2 id="3">predicci&oacute;n</h2><p>Resultado que entrega un modelo entrenado</p><pre class="codeinput">response.vectorOfLabels = categorical({<span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'relax'</span>, <span class="string">'up'</span>, <span class="string">'up'</span>, <span class="string">'relax'</span>});
+response.vectorOfTimePoints = [40 200 300 600 800 999]; <span class="comment">%1xw double (entero)</span>
+
+<span class="comment">% con un tic toc.</span>
+<span class="comment">% tiempo de procesamiento (segundos)</span>
+response.vectorOfProcessingTimes = [0.1 0.1 0.1 0.1 0.1 0.1]; <span class="comment">% 1xw double</span>
+
+<span class="comment">% no necesariamente depende del vector de arriba</span>
+response.class = categorical({<span class="string">'up'</span>}); <span class="comment">% adivinamos q es waveIn</span>
+</pre><pre class="codeinput">r1 = evalRecognition(repInfo, response)
+</pre><pre class="codeoutput">Warning: Not default gesture named "noGesture" found in vector of labels.
+Try changing the default name with the defaultGesture option in
+evalRecognition(...,...,evalOptions).
+Common default names are "relax" and "noGesture".
+If you want to stop viewing this warning, reset the showWarning option, view
+help. 
+
+r1 = 
+
+  evalRecognition with properties:
+
+             classResult: 1
+             recogResult: 0
+       overlappingFactor: NaN
+          defaultGesture: noGesture
+    thresholdRecognition: 0.2500
+             showWarning: 1
+
+</pre><h2 id="5">defaultGesture</h2><p>Se necesita cambiar el nombre del gesto por defecto. De lo contrario el reconocimiento no se calcula correctamente.</p><pre class="codeinput">evalOptions.defaultGesture = <span class="string">'relax'</span>;
+fprintf(<span class="string">'Resultado al arreglar gesto por defecto\n'</span>)
+r1 = evalRecognition(repInfo, response, evalOptions)
+</pre><pre class="codeoutput">Resultado al arreglar gesto por defecto
+
+r1 = 
+
+  evalRecognition with properties:
+
+             classResult: 1
+             recogResult: 1
+       overlappingFactor: 0.2853
+          defaultGesture: relax
+    thresholdRecognition: 0.2500
+             showWarning: 1
+
+</pre><pre class="codeinput">r1.plotResults()
+</pre><img vspace="5" hspace="5" src="example_dataset11Gestures_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%example_dataset11Gestures uses evalRecognition library to evaluate a
+%repetition using the dataset of 11 gestures.
+
+%{
+Laboratorio de Inteligencia y Visión Artificial
+ESCUELA POLITÉCNICA NACIONAL
+Quito - Ecuador
+
+autor: z_tja
+jonathan.a.zea@ieee.org
+
+"I find that I don't understand things unless I try to program them."
+-Donald E. Knuth
+
+18 May 2022
+Matlab 9.11.0.1873467 (R2021b) Update 3.
+%}
+
+%% 
+% información de la repetición (no depende del modelo) (es parte de los datos)
+repInfo.gestureName = categorical({'up'}); 
+
+
+repInfo.groundTruth = false(1, 1000); % 1000 xq 200 Hz por 5 segundos
+repInfo.groundTruth(200:400) = true;
+
+
+%% predicción
+% Resultado que entrega un modelo entrenado
+response.vectorOfLabels = categorical({'relax', 'relax', 'relax', 'up', 'up', 'relax'});
+response.vectorOfTimePoints = [40 200 300 600 800 999]; %1xw double (entero)
+
+% con un tic toc.
+% tiempo de procesamiento (segundos)
+response.vectorOfProcessingTimes = [0.1 0.1 0.1 0.1 0.1 0.1]; % 1xw double
+
+% no necesariamente depende del vector de arriba
+response.class = categorical({'up'}); % adivinamos q es waveIn
+
+%%
+r1 = evalRecognition(repInfo, response)
+
+%% defaultGesture
+% Se necesita cambiar el nombre del gesto por defecto. De lo contrario el
+% reconocimiento no se calcula correctamente.
+evalOptions.defaultGesture = 'relax';
+fprintf('Resultado al arreglar gesto por defecto\n')
+r1 = evalRecognition(repInfo, response, evalOptions)
+
+%%
+r1.plotResults()
+##### SOURCE END #####
+--></body></html>
