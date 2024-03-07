@@ -1,0 +1,10 @@
+{
+    "DQN_recognition": 0.9120261437908497,
+    "DDQN_recognition": 0.9120261437908497,
+    "DQN_post_recognition": 0.9236601307189543,
+    "DDQN_post_recognition": 0.9236601307189543,
+    "DQN_accuracy": 0.9609803921568627,
+    "DDQN_accuracy": 0.9609803921568627,
+    "DQN_post_accuracy": 0.9626797385620915,
+    "DDQN_post_accuracy": 0.9626797385620915
+}
