@@ -3,7 +3,6 @@
 /Run
 /testingJSON
 /trainingJSON
-/Experiments
 *.asv
 DQN-*.mat
 DDQN-*.mat
